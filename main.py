@@ -43,10 +43,12 @@ if __name__=='__main__':
 
     # read data
     # filenumber and date for plot title
-    filenumber = "000"
+    filenumber = ""
     date = "MM/DD/YYYY"
     # input file path here
     file_path = f'D:/Documents/Radiosonde_project/uprm033/uprm033.csv'
+
+
     #name columns
     columns = ['height', 'pressure', 'temperature', 'Humidity(RH%)', 'direction', 'speed']
     df = pd.read_csv(file_path, skiprows=105, names=columns, usecols=[5, 6, 7, 9, 34, 33], na_values='99999')
@@ -69,7 +71,8 @@ if __name__=='__main__':
 
 
     #keep only every nth row to reduce data points for plotting
-    df = df.iloc[::5,:]
+    rows_to_skip = 5
+    df = df.iloc[::rows_to_skip,:]
     p, T, RH, alt, wind_speed, wind_dir = data_to_variables(df)
 
     # resize all arrays to match pressure fix
